@@ -1,0 +1,9 @@
+FROM maven:3-amazoncorretto-17
+
+RUN ls
+
+WORKDIR /app
+
+COPY . /app
+
+ENTRYPOINT ["tail", "-f", "/dev/null"]
