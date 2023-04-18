@@ -1,5 +1,7 @@
 package com.ebitware.ehub.resources;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -11,19 +13,18 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 @AutoConfigureMockMvc(addFilters = false)
 @SpringBootTest
-class ResourcesApplicationTests {
+class HealthCheckTest {
     @Autowired
     MockMvc mvc;
 
     @Test
-    void contextLoads() throws Exception {
+    void getHealthCheck() throws Exception {
         MvcResult result = this.mvc.perform(MockMvcRequestBuilders
-                .get("/resources")
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON)).andReturn();
+				.get("/")
+				.contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON)).andReturn();
 
-        System.out.println("〽️: " + result.getResponse().getContentAsString());
-        System.out.println("〽️: " + result.getResponse().getStatus());
+		assertEquals(result.getResponse().getContentAsString(), "Server is working");
     }
 
 }
