@@ -1,6 +1,19 @@
 version: '3.8'
 
+networks:
+  ehub-network:
+
+
 services:
+  rabbitmq-service:
+    image: rabbitmq:3.11-management-alpine
+    expose:
+      - 5672
+    ports:
+      - 15672:15672
+    networks:
+      - ehub-network
+
   ehub-service:
     build:
       context: ./
@@ -10,5 +23,6 @@ services:
       - ./:/app
     ports:
       - 8080:8080
+    networks:
+      - ehub-network
     stdin_open: true
-
