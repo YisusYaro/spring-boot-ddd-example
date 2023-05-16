@@ -92,4 +92,13 @@ public class ResponserImpl implements Responser {
         }
     }
 
+    @Override
+    public void handleSaga(String operationId, SagaExecuter executer) {
+        try {
+            executer.execute();
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+    }
+
 }
